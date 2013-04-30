@@ -2,7 +2,7 @@ html {
 	overflow-x: hidden;
 	overflow-y: auto;
 
-	background: @background-gray;
+	background: @background-dark;
 }
 body {
 	margin: 0;
@@ -13,7 +13,7 @@ body {
 
 	line-height: @line-height;
 
-	background: @background-gray;
+	background: @background-dark;
 
 	&.gray {
 		background: @background-gray;
@@ -83,6 +83,10 @@ h1, h2, h3, h4, h5, h6 {
 	.small,
 	small {
 		font-size: 0.8em;
+	}
+
+	@media only screen and (max-width: 480px) {
+		margin-bottom: @spacing/2;
 	}
 }
 h1 {
@@ -228,14 +232,12 @@ dl {
 }
 
 blockquote {
-	@line-height: 30px;
-	@font-size: 20px;
-	@mark-size: @line-height + (@spacing/2);
+	@mark-size: 40px;
 
-	line-height: @line-height;
+	line-height: 1.5em;
 	font-family: @font-family-headline;
 	font-weight: 400;
-	font-size: @font-size;
+	font-size: 1.25em;
 
 	margin: 0 0 @spacing;
 
@@ -253,18 +255,11 @@ blockquote {
 			left: 0;
 
 			font-size: @mark-size;
-			line-height: @line-height * 2;
+			line-height: 1.5em;
 		}
 
 		@media only screen and (max-width: 480px) {
 			padding-left: 0;
-			font-size: @font-size*0.8;
-			line-height: @line-height*0.8;
-
-			&:after,
-			&:before {
-				line-height: @line-height * 1.6;
-			}
 
 			&:before {
 				float: left;
@@ -296,7 +291,7 @@ blockquote {
 				position: absolute;
 				right: 0;
 
-				line-height: @line-height * 2;
+				line-height: 1.5em;
 			}
 		}
 	}

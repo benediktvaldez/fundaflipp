@@ -24,23 +24,36 @@
 	.logo {
 		display: block;
 		line-height: 2em;
+		font-family: @font-family-logo;
 		font-weight: 400;
 		font-size: 4em;
 		text-decoration: none;
 		text-shadow: 0 -1px 2px fade(@color-black,50%);
 		color: @color-white;
-
-		span {
-			font-family: @font-family-logo;
-		}
 	}
 
 	.site-desc {
-		margin-bottom: @spacing;
 		width: 100%;
 
 		font-family: @font-family-special;
 		color: @color-pink-soft;
+
+		.short {
+			display: none;
+		}
+
+
+		@media only screen and (max-width: 380px) {
+			p {
+				margin-bottom: @spacing/4;
+			}
+			.short {
+				display: block;
+			}
+			.long {
+				display: none;
+			}
+		}
 	}
 
 }
