@@ -1,0 +1,404 @@
+html {
+	overflow-x: hidden;
+	overflow-y: auto;
+
+	background: @background-gray;
+}
+body {
+	margin: 0;
+
+	font-family: @font-family-special;
+	font-size: @font-size;
+	color: @font-color;
+
+	line-height: @line-height;
+
+	background: @background-gray;
+
+	&.gray {
+		background: @background-gray;
+	}
+
+	&.blue {
+		background: @background-blue;
+	}
+
+	@media only screen and (max-width: 480px) {
+		font-size: @font-size * 0.875;
+	}
+}
+
+.limit {
+	.border-box;
+	margin: 0 auto;
+	width: 100%;
+	max-width: @page-width;
+
+	@media only screen
+	 and (min-device-width : 320px)
+	 and (max-device-width : 568px)
+	 and (orientation : landscape) {
+		max-width: @page-height;
+	}
+}
+.inner-limit {
+	.border-box;
+	margin: 0 auto;
+	// width: 275px;
+}
+.padding {
+	padding: @gutter/2;
+}
+
+p {
+	margin: 0 0 @spacing;
+}
+
+a {
+	cursor: pointer;
+
+	color: @color-primary;
+}
+// a, a:link, a:visited {
+// 	cursor: pointer;
+	
+// 	color: @color-primary;
+
+// 	.transition (border 150ms, color 150ms);
+	
+// 	&:hover,
+// 	&:focus {
+// 		text-decoration: none;
+// 		border-bottom-color: @color-primary;
+// 	}
+// }
+h1, h2, h3, h4, h5, h6 {
+	margin: 0 0 @spacing;
+	padding: 0;
+	line-height: 1em;
+
+	font-family: @font-family-headline;
+	font-weight: 200;
+
+	.small,
+	small {
+		font-size: 0.8em;
+	}
+}
+h1 {
+	font-size: 4em;
+}
+h2 {
+	font-size: 3em;
+	font-weight: 100;
+}
+h3 {
+	font-size: 2em;
+	font-weight: 400;
+}
+h4 {
+	font-size: 1.5em;
+	font-weight: 400;
+}
+h5 {
+	font-size: 1.125em;
+	font-weight: 500;
+}
+h6 {
+	font-size: 1em;
+	font-weight: 500;
+}
+
+hgroup {
+	*:first-child {
+		margin-bottom: @spacing / 2;
+	}
+}
+
+.relative {
+	position: relative;
+}
+
+.hide{
+	display: none;
+}
+
+.clear {
+	clear: both;
+}
+
+.float-right {
+	float: right;
+}
+
+.float-left {
+	float: left;
+}
+
+.block {
+	display: block;
+	margin: 0 0 @spacing;
+}
+
+.spacing-top {
+	margin-top: @spacing;
+}
+
+.spacing-bottom {
+	margin-bottom: @spacing;
+}
+
+.spacing-left {
+	margin-left: @spacing;
+}
+
+.spacing-right {
+	margin-right: @spacing;
+}
+
+.gutter-top {
+	margin-top: @gutter;
+}
+
+.gutter-bottom {
+	margin-bottom: @gutter;
+}
+
+.gutter-left {
+	margin-left: @gutter;
+}
+
+.gutter-right {
+	margin-right: @gutter;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.text-left {
+	text-align: right;
+}
+
+.text-right {
+	text-align: right;
+}
+
+code {
+	// display: block;
+	.inline-block;
+	padding: 0 2px;
+	border: 1px solid @color-pink-soft;
+	background: fade(@color-blue,20%);
+}
+
+hr {
+	background: 0;
+	border: 0;
+	outline: 0;
+
+	.clearfix;
+	margin: @spacing 0;
+	height: 1px;
+	border-top: 1px solid @color-border;
+
+	&.dotline {
+		border-top-style: dashed;
+	}
+}
+
+dl {
+	dt {
+		font-weight: bold;
+	}
+	dd {
+	}
+}
+
+.columns {
+	.columns();
+	text-align: justify;
+
+	&:before {
+	}
+
+	&.rule {
+		.columns(@rule-width:1px);
+	}
+}
+
+blockquote {
+	@line-height: 30px;
+	@font-size: 20px;
+	@mark-size: @line-height + (@spacing/2);
+
+	line-height: @line-height;
+	font-family: @font-family-headline;
+	font-weight: 400;
+	font-size: @font-size;
+
+	margin: 0 0 @spacing;
+
+	&.mark,
+	&[class*="icon-"] {
+		position: relative;
+		padding-left: @mark-size + (@spacing);
+		min-height: @mark-size;
+
+		&:before {
+			display: block;
+			width: @mark-size + (@spacing/2);
+			position: absolute;
+			top: 0;
+			left: 0;
+
+			font-size: @mark-size;
+			line-height: @line-height * 2;
+		}
+
+		@media only screen and (max-width: 480px) {
+			padding-left: 0;
+			font-size: @font-size*0.8;
+			line-height: @line-height*0.8;
+
+			&:after,
+			&:before {
+				line-height: @line-height * 1.6;
+			}
+
+			&:before {
+				float: left;
+				position: relative;
+			}
+		}
+	}
+	&.mark {
+
+		&:before,
+		&:after {
+			font-family: @font-family;
+			font-size: @mark-size*4;
+			top: 40px;
+		}
+
+		&:before {
+			content: '\201C';
+			left: -5px;
+		}
+
+		&.double {
+			padding-right: @mark-size + (@spacing);
+
+			&:after {
+				content: '\201D';
+				display: block;
+				width: @mark-size + (@spacing/2);
+				position: absolute;
+				right: 0;
+
+				line-height: @line-height * 2;
+			}
+		}
+	}
+}
+
+ul, ol {
+	margin: 0 0 @spacing 0;
+	padding: 0 0 0 @spacing;
+}
+ul {
+	list-style-type:circle;
+
+	ul {
+		list-style-type: disc;
+		margin: @spacing/4 0 @spacing/4 0;
+	}
+
+	&.list {
+		list-style-type:none;
+
+		li {
+		}
+
+		li {
+			// ATH: not() virkar ekki í IE8 og eldri - notaði þá aðferð þannig að "ok" icon-ið birtist sem default en samt hægt að overwrite-a með því að gefa li icon-class
+			&:not([class*="icon-"]) {
+				.icon-before;
+				.icon-caret-right;
+			}
+
+			&:before {
+				display: inline-block;
+				margin-right: .5em;
+				margin-left: -@spacing;
+				width: 1em;
+
+				text-align: center;
+				color: @color-primary;
+			}
+		}
+		
+		ul {
+			list-style-type: none;
+			margin-left: @spacing/4;
+
+			li {
+				&:not([class*="icon-"]) {
+					.icon-angle-right;
+				}
+			}
+		}
+
+	}
+}
+
+ol {
+	margin-left: @spacing/4;
+	list-style-type: decimal;
+
+	ol {
+		list-style-type: lower-alpha;
+		margin: @spacing/4 0 @spacing/4 @spacing/4;
+	}
+
+	&.list {
+		counter-reset: li;
+		list-style:none;
+		margin-left:0;
+
+		li {
+			position:relative;
+
+			&:before {
+				content: counter(li,decimal);
+				counter-increment: li;
+				
+				width:1.5em;
+				height:1.5em;
+				line-height:1.5em;
+				position:absolute;
+				top:2px;
+				left:-1.75em;
+				
+				font-weight:bold;
+				font-size:0.75em;
+				text-align:center;
+				.text-on-bg;
+
+				.border-radius;
+			}
+		}
+
+		ol {
+			counter-reset: li;
+			list-style-type: none;
+
+			li {
+				&:before {
+					content: counter(li,lower-alpha);
+					counter-increment: li;
+				}
+			}
+		}
+	}
+}

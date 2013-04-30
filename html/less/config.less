@@ -1,0 +1,76 @@
+// config.less
+
+// Mixins
+@using-ieclasses: true; 	// whether or not the markup has html5-boilerplate style IE classes in it or not
+@using-modernizr: false; 	// whether or not modernizer feature-detection classes are being used
+@using-filters: true;		// whether or not to use MS-specific 'filter' properties (can make IE slow!)
+
+// Sizes
+@spacing: 20px; // paragraph/heading
+@gutter: 10px; // gutter/padding
+@page-width: 640px;
+@page-height: 1136px;
+@status-bar: 20px;
+@form-side-width: 150px;
+@radius: 1px;
+@form-border-radius: @radius;
+@transition-duration: 250ms;
+
+@size-huge: 64px;
+@size-large: 48px;
+@size-normal: 40px;
+@size-small: 32px;
+@size-tiny: 22px;
+
+// Typography
+@font-family: Arial, tahoma, sans-serif;
+@font-family-special: 'Arimo', @font-family;
+@font-family-headline: 'Raleway', @font-family;
+@font-family-logo: 'Pacifico', cursive;
+@font-size: 16px;
+@font-color: #333;
+@line-height: 1.5em;
+
+// Grid
+@grid-count: 10;
+@grid-min-break: 320;
+@grid-max-break: 960;
+@grid-break-interval: 120;
+
+// Buttons
+@button-min-break: @grid-min-break;
+@button-max-break: @grid-max-break;
+@button-break-interval: @grid-break-interval;
+@button-border-radius: @radius;
+@button-font-size-huge: @font-size * 2;
+@button-font-size-large: @font-size + 6;
+@button-font-size-normal: @font-size * 1;
+@button-font-size-small: @font-size * 1;
+@button-font-size-tiny: @font-size - 2;
+
+// Grayscale
+@color-black: #000;
+@color-gray-darker: #222;
+@color-gray-dark: #555;
+@color-gray: #777;
+@color-gray-light: #999;
+@color-gray-lighter: #ececec;
+@color-white: #fff;
+
+// Colors
+@color-blue: #1e429a;
+@color-red: #ea3d3f;
+@color-pink: #da1c5c;
+@color-pink: #d40050;
+@color-pink-soft: #ffa0a1;
+
+@color-primary: @color-red;
+@color-secondary: #fff;
+@color-border: #ccc;
+@background-red: @color-primary url("../img/bakgTile_red.jpg") fixed repeat center center;
+// @background-white: @color-white url("../img/bakgTile.png") fixed repeat left top;
+@background-white: @color-white;
+@background-gray: @color-gray-lighter url("../img/bakgTile.png") fixed repeat left top;
+@background-blue: @color-blue url("../img/grunge.png") fixed repeat left top;
+@background-dark: @color-gray-darker url("../img/bakgTile_dark.jpg") fixed repeat left top;
+@background: @background-red;

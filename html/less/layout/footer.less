@@ -1,0 +1,152 @@
+// footer.less
+
+.footer {
+	@icon-size: 20px;
+	@height: @icon-size + @gutter;
+	.border-box;
+	.user-select (none);
+	margin: 0;
+	// padding: @gutter/2 @spacing;
+	height: @height;
+	// position: fixed;
+	// left: 0;
+	// right: 0;
+	// bottom: 0;
+	// z-index: 30;
+
+	text-align: center;
+
+	// background: @background;
+	// .box-shadow (inset 0 10px 10px -10px fade(@color-black,50%));
+
+	color: @color-gray-lighter;
+
+
+	a.skapalon {
+		.center-block;
+		.size (40px);
+		// display: none;
+
+		>img {
+			display: block;
+			.size (40px);
+		}
+	}
+
+	p {
+		margin: 0;
+		line-height: @icon-size;
+		font-family: @font-family-special;
+		font-size: 8px;
+	}
+
+	.limit {
+	}
+
+	.apple,
+	.w3c {
+		white-space: nowrap;
+		margin-top: -@icon-size/2;
+		position: absolute;
+		top: 50%;
+		right: @gutter;
+
+		height: @icon-size;
+		line-height: @icon-size;
+
+		>a,
+		>div {
+			.inline-block;
+			padding-left: @gutter;
+			font-size: @icon-size * .75;
+			// line-height: @height - @gutter*2;
+			text-decoration: none;
+			color: @color-gray-lighter;
+
+			&:first-child {
+				padding-left: 0;
+			}
+
+			&.full-iphone {
+				.standalone & {
+					display: none;
+				}
+			}
+		}
+	}
+	.standalone & .w3c {
+		// margin-right: -77px/2;
+		// right: 50%;
+	}
+	.apple {
+		right: auto;
+		left: @gutter;
+
+		.standalone & {
+			display: none;
+		}
+	}
+}
+
+.iphone {
+	.border-box;
+	margin: 0;
+	padding: 110px 30px 0;
+	width: 387px;
+	height: 803px;
+	position: absolute;
+	right: @gutter;
+	bottom: -520px;
+	background: url("../img/iphone.png") no-repeat center top;
+	z-index: 99;
+
+	.transition (bottom 500ms,left 500ms,margin 500ms);
+
+	&.opt-out {
+		bottom: -803px - @spacing;
+	}
+
+	&.full {
+		// margin-left: -387px/2;
+		left: @page-width - (@page-width - 387px/2);
+		bottom: @spacing;
+	}
+
+	.phone {
+		display: none;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+	.inside {
+		.border-box;
+		position: relative;
+		padding: @gutter + 9 @gutter+4 @gutter;
+		width: @page-width/2 + 8;
+		height: @page-height/2 + 9;
+	}
+
+	&.try-ios {
+		display: block;
+	}
+	&.try-standalone {
+		display: none;
+	}
+
+	@media only screen
+	 and (min-device-width : 320px)
+	 and (max-device-width : 568px) {
+		&.try-ios {
+			display: none;
+		}
+		&.try-standalone {
+			display: block;
+		}
+	}
+
+	.standalone & {
+		display: none;
+	}
+}

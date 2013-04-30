@@ -1,0 +1,118 @@
+.nav {
+
+	&.bottom {
+		@nav-icon-size: 40px;
+		@nav-height: @nav-icon-size + @gutter*3;
+		@nav-top-margin: @status-bar + 5;
+
+		overflow: hidden;
+
+		margin-top: @nav-top-margin;
+		padding:;
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 30px;
+		z-index: 30;
+
+		background: @background-dark;
+		.box-shadow (inset 0 0px 10px 0px @color-black);
+
+		>ul {
+			.limit;
+			.reset-list;
+			.clearfix;
+			margin: 0 auto;
+			padding: 0 @gutter;
+			text-align: right;
+
+			>.selected-item {
+				margin-left: 0;
+				position: absolute;
+				bottom: -@nav-height*2;
+				top: 0px;
+				bottom: -10px;
+				left: 0;
+				z-index: 29;
+				background: @background-gray;
+				.transition (width @transition-duration, left @transition-duration, top @transition-duration);
+
+				&.active {
+					bottom: 0;
+					// .box-shadow (inset 0 -5px 5px -5px fade(@color-black,50%),inset 0 5px 5px -5px fade(@color-black,50%));
+					// .box-shadow (0 0 10px @color-black);
+				}
+				&.hidden {
+					top: @nav-height*2;
+				}
+
+				.gray & {
+					// background: @background-gray;
+				}
+				.blue & {
+					// background: @background-blue;
+				}
+			}
+
+			>li {
+				.inline-block;
+				// float: left;
+				// padding: 0 @gutter 0 0;
+				position: relative;
+				z-index: 30;
+
+				>a {
+					margin: 0 auto;
+					display: block;
+					height: @nav-height - 10;
+					// width: @nav-height;
+					line-height: @nav-height - 10;
+
+					font-size: @nav-icon-size;
+					text-decoration: none;
+					text-shadow: 0 0 10px @color-black;
+					text-align: center;
+					color: @color-gray-lighter;
+
+					.transition (text-shadow @transition-duration, color @transition-duration);
+
+					&:hover {
+						color: @color-white;
+					}
+
+					&.selected {
+						// color: @color-gray-darker;
+						color: transparent;
+						text-shadow: 0 0 5px fade(@color-black,30%);
+
+						background: @background-dark;
+						.background-clip (text);
+
+						&:hover {
+							// color: @color-gray-lighter;
+						}
+						
+						.gray & {
+							// color: @color-gray-darker;
+
+							&:hover {
+								// color: @color-gray-dark;
+							}
+						}
+					}
+
+					>img {
+						max-height: @nav-height - @gutter;
+						padding: @gutter/2 0;
+					}
+
+				}
+
+				&:first-child {
+					// float: left;
+					// margin-left: @gutter;
+				}
+			}
+		}
+	}
+}
