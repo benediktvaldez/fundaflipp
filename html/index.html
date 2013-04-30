@@ -1,13 +1,94 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+
+<!--[if lt IE 7]>		<html lang="en" class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>			<html lang="en" class="no-js lt-ie10 lt-ie9 lt-ie8 ie7"> <![endif]-->
+<!--[if IE 8]>			<html lang="en" class="no-js lt-ie10 lt-ie9 ie8"> <![endif]-->
+<!--[if IE 9]>			<html lang="en" class="no-js lt-ie10 ie9"><![endif]-->
+<!--[if gt IE 9]><!-->	<html lang="en" class="no-js"><!--<![endif]-->
+
 	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="user-scalable=no,initial-scale=1">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="apple-mobile-web-app-title" content="Fundaflipp" />
+
+		<link rel="apple-touch-icon" href="img/app-icon.png" />
+		<link rel="apple-touch-icon-precomposed" href="img/app-icon.png" />
+		<link rel="apple-touch-icon-precomposed" sizes="57x57" href="img/app-icon57.png" />
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/app-icon72.png" />
+		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/app-icon114.png" />
+		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/app-icon144.png" />
+
 		<title>fundaflipp</title>
-		<link rel="stylesheet" href="/less/styles.less">
-		<script>
-			console.log($('p'));
-		</script>
+
+		<link type="text/css" rel="stylesheet" href="less/main.less">
+
+		<script src="js/libs/jquery.js"></script>
+		<script src="js/libs/modernizr.js"></script>
+
+		<script src="js/fundaflipp.js"></script>
+
+		<!--[if lte IE 7]>
+			<script src="js/icons.js"></script>
+		<![endif]-->
 	</head>
 	<body>
-		<p>Hello world!</p>
+		<header class="header">
+			<div class="limit padding-side">
+				<a href="/" class="logo"><span>fundaflipp</span></a>
+				<div class="site-desc">
+					Sed eu dignissim dui. Curabittur in nibh sem. Sed feugiat diam sit amet turpis vehicula fermentum. Ut id sapien odio, quis mollis turpis. Proin ut velit eget sapien aliquet fermentum.
+				</div>
+			</div>
+		</header>
+
+		<div class="content-wrap">
+			<section class="section white app">
+				<div class="limit padding-vert small">
+					<div class="inner-limit padding">
+						<h2 class="app-title">Þátttakendur</h2>
+					</div>
+					<div class="fundaflipp-app">
+						<aside class="aside item-controls">
+							<div class="inside">
+								<a href="#_" class="remove-item icon-blocked disabled"></a>
+								<a href="#_" class="add-item icon-plus"></a>
+							</div>
+						</aside>
+						<div class="items">
+						</div>
+						<div class="items-controls">
+							<a href="#_" class="clear-all button small white float-left icon-blocked">Hreinsa</a>
+							<a href="#_" class="finalize button float-right icon-caret-right ico-right">Áfram</a>
+						</div>
+						<div class="results">
+						</div>
+						<div class="results-controls">
+							<div class="button-group float-left">
+								<a href="#_" class="go-back button small white icon-caret-left">Til baka</a>
+								<a href="#_" class="finalize button small white">Ný orð</a>
+							</div>
+						</div>
+						<div class="templates">
+							<div class="form item">
+								<input type="text" value="" placeholder="Fullt nafn hér" />
+							</div>
+							<div class="form result">
+								<input type="text" value="" placeholder="Vantar nafn?" />
+								<div class="phrase icon-double-angle-right"></div>
+							</div>
+						</div>
+					</div>
+					<div class="output"></div>
+				</div>
+			</section>
+		</div>
+
+		<footer class="footer">
+			<div class="limit padding">
+				<a href="#skapalon" class="skapalon"><img src="img/skapalon.png" alt=""></a>
+			</div>
+		</footer>
 	</body>
 </html>
