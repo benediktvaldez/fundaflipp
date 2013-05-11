@@ -7,7 +7,10 @@
 
 	window.fundaflipp = function(wrapEl){
 		this.wrapEl = $(wrapEl);
-		this.navEls = $('[data-section]');
+		this.siteTitleEl = $('.header').find('.logo');
+		this.siteDescShortEl = $('.site-desc').find('.short');
+		this.siteDescLongEl = $('.site-desc').find('.long');
+
 		this.appEl = $('.fundaflipp-app');
 		this.appParentLimitEl = this.appEl.parent('.limit');
 		this.appTitleEl = $('.app-title');
@@ -24,10 +27,6 @@
 		this.getBrowserInformation();
 		this.setStorage();
 		this.getData();
-
-		this.siteTitleEl = $('.header').find('.logo');
-		this.siteDescShortEl = $('.site-desc').find('.short');
-		this.siteDescLongEl = $('.site-desc').find('.long');
 
 		this.processSections();
 		this.createItems();
@@ -76,14 +75,17 @@
 				url: 'js/db.json',
 				dataType: 'json',
 				success: $.proxy(function(data){
-					this.site = data.site;
-					this.data = data.livelist;
+					this.data = data;
 
-					this.siteTitleEl.html(this.site.name.value);
-					this.siteDescShortEl.html(this.site.shortDesc.value);
-					this.siteDescLongEl.html(this.site.longDesc.value);
+					this.updateSiteInfo();
 				},this)
 			});
+		},
+
+		updateSiteInfo: function(){
+			this.siteTitleEl.html(this.data.site.name.value);
+			this.siteDescShortEl.html(this.data.site.shortDesc.value);
+			this.siteDescLongEl.html(this.data.site.longDesc.value);
 		},
 
 		attachEvents: function(){
@@ -91,11 +93,6 @@
 
 			var obj = this;
 
-			this.navEls.on('click',function(e){
-				e.preventDefault();
-				var sectionID = $(this).attr('data-section');
-				obj.showSection(sectionID,$(this));
-			});
 			$('.show-iphone').on('click', $.proxy(this.showIphone,this));
 			$('.hide-iphone').on('click', $.proxy(this.hideIphone,this));
 			$('.full-iphone').on('click', $.proxy(this.fullIphone,this));
@@ -138,7 +135,7 @@
 		},
 
 		goBack: function(e){
-			e.preventDefault();
+			if (e) e.preventDefault();
 			this.appTitleEl.html('Þátttakendur');
 			this.appParentLimitEl.addClass('small');
 			this.appItemsEl.show();
@@ -310,7 +307,7 @@
 		},
 
 		selectPhrase: function(){
-			return this.data[this.rand(0,this.data.length-1)];
+			return this.data.livelist[this.rand(0,this.data.livelist.length-1)];
 		},
 
 		processSections: function(){
@@ -389,28 +386,53 @@
 			this.appFeedbackEl.hide();
 			this.appFeedbackControlsEl.hide();
 			this.appParentLimitEl.removeClass('small');
-			this.appSettingsEl.children('.setting').remove();
+			this.appSettingsEl.children('h4').remove();
+			this.appSettingsEl.children('.setting-site').remove();
+			this.appSettingsEl.children('.livelist').remove();
 
 			this.appTitleEl.html('Stillingar');
 			this.appSettingsEl.show();
 			this.appSettingsControlsEl.show();
 
-			$.each(this.site,$.proxy(this.addSetting,this));
+			this.appSettingsEl.append($('<h4>').html('Síðan'));
+			$.each(this.data.site,$.proxy(this.addSiteSetting,this));
+
+			this.appSettingsEl.append($('<h4>').html('Orðalistinn'));
+			this.appSettingsEl.append($('<div>').addClass('item-list livelist grid gutter collapse480'));
+			$.each(this.data.livelist,$.proxy(this.addListItem,this));
 		},
 
-		addSetting: function(index,item){
+		addSiteSetting: function(index,item){
 			var itemTitle = typeof item.title !== 'undefined' && item.title !== "" ? item.title : index;
 			var itemValue = typeof item.value !== 'undefined' && item.value !== "" ? item.value : item;
 
-			this.appTemplatesEl.find('.setting').clone().appendTo('.settings').find('label').html(itemTitle).siblings('input').val(itemValue);
+			this.appTemplatesEl.find('.setting-site').clone().appendTo('.settings').find('label').html(itemTitle).siblings('input').attr('data-index',index).val(itemValue).on('change',$.proxy(function(e){
+				var itemEl = $(e.currentTarget);
+				var index = itemEl.attr('data-index');
+				var value = itemEl.val();
+
+				this.data.site[index].value = value;
+			},this));
 		},
+
+		addListItem: function(index,item){
+			this.appTemplatesEl.find('.setting-item').clone().appendTo('.livelist').find('input').val(item);
+		},
+
 		saveSettings: function(e){
 			if (e) {
 				e.preventDefault();
 				var itemEl = $(e.currentTarget);
 				if (itemEl.hasClass("disabled")) return;
 			}
-			alert('Ekki í boði eins og er!');
+			$.ajax({
+				url: 'json.php',
+				type: 'POST',
+				data: {json: JSON.stringify(this.data)},
+				dataType: 'json'
+			});
+			this.updateSiteInfo();
+			this.goBack();
 		},
 
 		feedback: function(e){
