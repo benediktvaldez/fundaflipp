@@ -57,6 +57,7 @@
 
 		setStorage: function(){
 			this.timestamp();
+			if (localStorage.getItem('login') === null) localStorage.setItem('login',"false");
 			if (localStorage.getItem('suggest-iphone') === null) localStorage.setItem('suggest-iphone',"true");
 			if (localStorage.getItem('list') !== null) {
 				this.live_list = JSON.parse(localStorage.getItem('list'));
@@ -104,6 +105,7 @@
 			$('.activate-settings').on('click',$.proxy(this.activateSettings,this));
 			$('.save-settings').on('click',$.proxy(this.saveSettings,this));
 			$('.feedback').on('click',$.proxy(this.feedback,this));
+			$('.log-out').on('click',$.proxy(this.logOut,this));
 
 			setTimeout(function(){
 				if (localStorage.getItem('suggest-iphone') == "true") $('.iphone').removeClass('opt-out');
@@ -371,12 +373,32 @@
 			this.showSection('iphone',itemEl);
 		},
 
+		checkCredentials: function(){
+			var value,
+				verdict;
+			if (localStorage.getItem('login') !== 'true'){
+				localStorage.setItem('login','false');
+				value=prompt("..you know what to do!","");
+				verdict = value === 'baratest';
+				if (verdict) localStorage.setItem('login', 'true');
+			} else if (localStorage.getItem('login') === 'true') {
+				verdict = true;
+			}
+
+			return verdict;
+		},
+
+		logOut: function(){
+			localStorage.setItem('login','false');
+		},
+
 		activateSettings: function(e){
 			if (e) {
 				e.preventDefault();
 				var itemEl = $(e.currentTarget);
 				if (itemEl.hasClass("disabled")) return;
 			}
+			if(!this.checkCredentials()) return alert('or clearly you don\'t! :O');
 			if (this.debug) console.log('activateSettings');
 			this.appItemsEl.hide();
 			this.appItemsControlsEl.hide();
