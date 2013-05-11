@@ -104,6 +104,7 @@
 			$('.add-item').on('click',$.proxy(this.addItem,this));
 			$('.remove-item').on('click',$.proxy(this.removeItem,this));
 			$('.activate-settings').on('click',$.proxy(this.activateSettings,this));
+			$('.save-settings').on('click',$.proxy(this.saveSettings,this));
 			$('.feedback').on('click',$.proxy(this.feedback,this));
 
 			setTimeout(function(){
@@ -401,6 +402,14 @@
 			var itemValue = typeof item.value !== 'undefined' && item.value !== "" ? item.value : item;
 
 			this.appTemplatesEl.find('.setting').clone().appendTo('.settings').find('label').html(itemTitle).siblings('input').val(itemValue);
+		},
+		saveSettings: function(e){
+			if (e) {
+				e.preventDefault();
+				var itemEl = $(e.currentTarget);
+				if (itemEl.hasClass("disabled")) return;
+			}
+			alert('Ekki í boði eins og er!');
 		},
 
 		feedback: function(e){
