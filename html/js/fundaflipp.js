@@ -9,6 +9,7 @@
 		this.wrapEl = $(wrapEl);
 		this.navEls = $('[data-section]');
 		this.appEl = $('.fundaflipp-app');
+		this.appParentLimitEl = this.appEl.parent('.limit');
 		this.appTitleEl = $('.app-title');
 		this.appItemControlsEl = this.appEl.find('.item-controls');
 		this.appItemsEl = this.appEl.find('.items');
@@ -85,7 +86,7 @@
 		},
 
 		attachEvents: function(){
-			// console.log('attachEvents');
+			if (this.debug) console.log('attachEvents');
 
 			var obj = this;
 
@@ -137,6 +138,7 @@
 		goBack: function(e){
 			e.preventDefault();
 			this.appTitleEl.html('Þátttakendur');
+			this.appParentLimitEl.addClass('small');
 			this.appItemsEl.show();
 			this.appItemsControlsEl.show();
 			this.appItemControlsEl.show();
@@ -210,7 +212,6 @@
 		},
 
 		processItems: function(){
-			// console.log('process' + this.processCount);
 			var items = this.appEl.find('.items').find('.item');
 
 			this.clearList();
@@ -277,7 +278,7 @@
 		},
 
 		removeItem: function(e){
-			console.log('removeItem');
+			if (this.debug) console.log('removeItem');
 			e.preventDefault();
 			var itemEl = $(e.currentTarget),
 				itemActive = parseInt(itemEl.parent('.inside').parent('.item-controls').attr('data-active'),10);
@@ -288,7 +289,7 @@
 		},
 
 		removeItemManual: function(item) {
-			console.log(item);
+			if (this.debug) console.log(item);
 		},
 
 		addItem: function(e){
@@ -324,7 +325,7 @@
 			var sectionID = typeof($sectionID) !== 'undefined' && $sectionID !== '' ? $sectionID : "home";
 			var linkEl = typeof $linkEl != 'undefined' && $linkEl !== "" ? $linkEl : $('[data-section="' + sectionID + '"]');
 			var sectionEl = $('[data-sectionid="' + sectionID + '"]');
-			// console.log('-showSection - ' + sectionID);
+			if (this.debug) console.log('-showSection - ' + sectionID);
 
 			$('[data-sectionid]:not([data-sectionid="' + sectionID + '"])').hide();
 
@@ -377,7 +378,7 @@
 				var itemEl = $(e.currentTarget);
 				if (itemEl.hasClass("disabled")) return;
 			}
-			console.log('activateSettings');
+			if (this.debug) console.log('activateSettings');
 			this.appItemsEl.hide();
 			this.appItemsControlsEl.hide();
 			this.appItemControlsEl.hide();
@@ -385,11 +386,21 @@
 			this.appResultsControlsEl.hide();
 			this.appFeedbackEl.hide();
 			this.appFeedbackControlsEl.hide();
+			this.appParentLimitEl.removeClass('small');
+			this.appSettingsEl.children('.setting').remove();
 
 			this.appTitleEl.html('Stillingar');
 			this.appSettingsEl.show();
 			this.appSettingsControlsEl.show();
 
+			$.each(this.site,$.proxy(this.addSetting,this));
+		},
+
+		addSetting: function(index,item){
+			var itemTitle = typeof item.title !== 'undefined' && item.title !== "" ? item.title : index;
+			var itemValue = typeof item.value !== 'undefined' && item.value !== "" ? item.value : item;
+
+			this.appTemplatesEl.find('.setting').clone().appendTo('.settings').find('label').html(itemTitle).siblings('input').val(itemValue);
 		},
 
 		feedback: function(e){
@@ -398,7 +409,7 @@
 				var itemEl = $(e.currentTarget);
 				if (itemEl.hasClass("disabled")) return;
 			}
-			console.log('feedback');
+			if (this.debug) console.log('feedback');
 			this.appItemsEl.hide();
 			this.appItemsControlsEl.hide();
 			this.appItemControlsEl.hide();

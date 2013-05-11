@@ -227,7 +227,9 @@
 	padding-left: @form-side-width + @spacing;
 
 	> label {
-		position: absolute; top: 0; left: 0;
+		position: absolute;
+		top: 0;
+		left: 0;
 
 		margin: 0;
 		padding: 0;
@@ -241,6 +243,15 @@
 
 			margin-left: 0;
 			margin-top: -@size-normal / 1.85;
+		}
+	}
+
+	@media only screen and (max-width: 480px) {
+		padding-left: @spacing;
+
+		> label {
+			position: relative;
+			width: auto;
 		}
 	}
 }

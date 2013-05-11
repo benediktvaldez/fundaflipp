@@ -1,8 +1,17 @@
 {
 	"site": {
-		"name": "fundaflipp",
-		"short-desc": "Sed eu dignissim dui. Curabittur in nibh sem. Sed feugiat diam sit amet turpis vehicula.",
-		"long-desc": "Sed eu dignissim dui. Curabittur in nibh sem. Sed feugiat diam sit amet turpis vehicula. Ut id sapien odio, quis mollis turpis. Proin ut velit eget sapien aliquet fermentum."
+		"name": {
+			"title": "Heiti síðu",
+			"value": "fundaflipp"
+		},
+		"short-desc": {
+			"title": "Short desc",
+			"value": "Sed eu dignissim dui. Curabittur in nibh sem. Sed feugiat diam sit amet turpis vehicula."
+		},
+		"long-desc": {
+			"title": "Long desc",
+			"value": "Sed eu dignissim dui. Curabittur in nibh sem. Sed feugiat diam sit amet turpis vehicula. Ut id sapien odio, quis mollis turpis. Proin ut velit eget sapien aliquet fermentum."
+		}
 	},
 	"livelist": [
 		"Gylfi Sigurðsson",
