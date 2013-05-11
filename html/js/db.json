@@ -4,13 +4,13 @@
 			"title": "Heiti síðu",
 			"value": "fundaflipp"
 		},
-		"short-desc": {
-			"title": "Short desc",
-			"value": "Sed eu dignissim dui. Curabittur in nibh sem. Sed feugiat diam sit amet turpis vehicula."
+		"shortDesc": {
+			"title": "Stutt lýsing",
+			"value": "Fundaflipp er frábært tól til að krydda<br/>upp á annars drepleiðinlegum fundum!"
 		},
-		"long-desc": {
-			"title": "Long desc",
-			"value": "Sed eu dignissim dui. Curabittur in nibh sem. Sed feugiat diam sit amet turpis vehicula. Ut id sapien odio, quis mollis turpis. Proin ut velit eget sapien aliquet fermentum."
+		"longDesc": {
+			"title": "Löng lýsing",
+			"value": "Fundaflipp er frábært tól sem gerir þér kleift að velja orð/frasa af handahófi fyrir hvern fundarmeðlim sem hann neyðist svo til að koma að á komandi fundi/fyrirlestri."
 		}
 	},
 	"livelist": [
