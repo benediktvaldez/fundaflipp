@@ -28,15 +28,6 @@
 		this.createItems();
 		this.attachEvents();
 
-		// JSON.stringify(testObject):
-		// JSON.parse(localStorage.testObject);
-
-		// console.log(localStorage);
-
-		setTimeout(function(){
-			$(".launch-image").fadeOut();
-		},this.delay);
-
 		setTimeout($.proxy(function(){
 			$(window).resize($.proxy(this.onResize,this)).resize();
 		},this),this.delay);
