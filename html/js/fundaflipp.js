@@ -24,6 +24,11 @@
 		this.getBrowserInformation();
 		this.setStorage();
 		this.getData();
+
+		this.siteTitleEl = $('.header').find('.logo');
+		this.siteDescShortEl = $('.site-desc').find('.short');
+		this.siteDescLongEl = $('.site-desc').find('.long');
+
 		this.processSections();
 		this.createItems();
 		this.attachEvents();
@@ -72,6 +77,10 @@
 				success: $.proxy(function(data){
 					this.site = data.site;
 					this.data = data.livelist;
+
+					this.siteTitleEl.html(this.site.name.value);
+					this.siteDescShortEl.html(this.site.shortDesc.value);
+					this.siteDescLongEl.html(this.site.longDesc.value);
 				},this)
 			});
 		},
