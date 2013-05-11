@@ -115,6 +115,7 @@
 			this.appItemsEl.hide();
 			this.appItemsControlsEl.hide();
 			this.appItemControlsEl.hide();
+			if (this.appResultsEl.children('.result').length <= 0) this.appResultsEl.html($('<h6>').text('Nauðsynlegt er að slá inn nöfn fyrst!'))
 			this.appResultsEl.show();
 			this.appResultsControlsEl.show();
 			// this.clearList();
