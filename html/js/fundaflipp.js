@@ -74,6 +74,7 @@
 		getData: function(){
 			$.ajax({
 				url: 'js/db.json',
+				dataType: 'json',
 				success: $.proxy(function(data){
 					this.site = data.site;
 					this.data = data.livelist;
