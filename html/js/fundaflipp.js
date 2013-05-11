@@ -16,6 +16,10 @@
 		this.appResultsEl = this.appEl.find('.results');
 		this.appResultsControlsEl = this.appEl.find('.results-controls');
 		this.appTemplatesEl = this.appEl.find('.templates');
+		this.appSettingsEl = this.appEl.find('.settings');
+		this.appSettingsControlsEl = this.appEl.find('.settings-controls');
+		this.appFeedbackEl = this.appEl.find('.feedback');
+		this.appFeedbackControlsEl = this.appEl.find('.feedback-controls');
 		this.getBrowserInformation();
 		this.setStorage();
 		this.getData();
@@ -98,6 +102,8 @@
 			$('.go-back').on('click',$.proxy(this.goBack,this));
 			$('.add-item').on('click',$.proxy(this.addItem,this));
 			$('.remove-item').on('click',$.proxy(this.removeItem,this));
+			$('.activate-settings').on('click',$.proxy(this.activateSettings,this));
+			$('.feedback').on('click',$.proxy(this.feedback,this));
 
 			setTimeout(function(){
 				if (localStorage.getItem('suggest-iphone') == "true") $('.iphone').removeClass('opt-out');
@@ -115,6 +121,10 @@
 			},this));
 
 			this.appTitleEl.html('Niðurstöður');
+			this.appSettingsEl.hide();
+			this.appSettingsControlsEl.hide();
+			this.appFeedbackEl.hide();
+			this.appFeedbackControlsEl.hide();
 			this.appItemsEl.hide();
 			this.appItemsControlsEl.hide();
 			this.appItemControlsEl.hide();
@@ -132,6 +142,10 @@
 			this.appItemControlsEl.show();
 			this.appResultsEl.hide();
 			this.appResultsControlsEl.hide();
+			this.appSettingsEl.hide();
+			this.appSettingsControlsEl.hide();
+			this.appFeedbackEl.hide();
+			this.appFeedbackControlsEl.hide();
 			this.processItems();
 		},
 
@@ -357,6 +371,48 @@
 			this.showSection('iphone',itemEl);
 		},
 
+		activateSettings: function(e){
+			if (e) {
+				e.preventDefault();
+				var itemEl = $(e.currentTarget);
+				if (itemEl.hasClass("disabled")) return;
+			}
+			console.log('activateSettings');
+			this.appItemsEl.hide();
+			this.appItemsControlsEl.hide();
+			this.appItemControlsEl.hide();
+			this.appResultsEl.hide();
+			this.appResultsControlsEl.hide();
+			this.appFeedbackEl.hide();
+			this.appFeedbackControlsEl.hide();
+
+			this.appTitleEl.html('Stillingar');
+			this.appSettingsEl.show();
+			this.appSettingsControlsEl.show();
+
+		},
+
+		feedback: function(e){
+			if (e) {
+				e.preventDefault();
+				var itemEl = $(e.currentTarget);
+				if (itemEl.hasClass("disabled")) return;
+			}
+			console.log('feedback');
+			this.appItemsEl.hide();
+			this.appItemsControlsEl.hide();
+			this.appItemControlsEl.hide();
+			this.appResultsEl.hide();
+			this.appResultsControlsEl.hide();
+			this.appSettingsEl.hide();
+			this.appSettingsControlsEl.hide();
+
+			this.appTitleEl.html('Feedback');
+			this.appFeedbackEl.show();
+			this.appFeedbackControlsEl.show();
+
+		},
+
 		onResize: function(){
 			if(this.doReset !== false);
 				clearTimeout(this.doReset);
@@ -394,5 +450,5 @@
 
 $(function(){
 	var fundaflipp = new window.fundaflipp("html");
-	console.log(fundaflipp);
+	if (fundaflipp.debug) console.log(fundaflipp);
 });
