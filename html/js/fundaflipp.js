@@ -259,7 +259,7 @@
 			e.preventDefault();
 			var itemEl = $(e.currentTarget),
 				itemActive = parseInt(itemEl.parent('.inside').parent('.item-controls').attr('data-active'),10);
-			// if(itemEl.hasClass('disabled')) return;
+			if(itemEl.hasClass('disabled')) return;
 			this.appItemsEl.find('[data-index=' + itemActive + ']').remove();
 			this.processItems();
 			this.updateList();
