@@ -74,7 +74,8 @@
 			$.ajax({
 				url: 'js/db.json',
 				success: $.proxy(function(data){
-					this.data = data;
+					this.site = data.site;
+					this.data = data.livelist;
 				},this)
 			});
 		},
@@ -105,6 +106,8 @@
 
 		finalize: function(e){
 			e.preventDefault();
+			var itemEl = $(e.currentTarget);
+			if (itemEl.hasClass("disabled")) return;
 			this.appResultsEl.children('.result').remove();
 
 			$.each(this.live_list.items,$.proxy(function(index,item){
@@ -115,7 +118,7 @@
 			this.appItemsEl.hide();
 			this.appItemsControlsEl.hide();
 			this.appItemControlsEl.hide();
-			if (this.appResultsEl.children('.result').length <= 0) this.appResultsEl.html($('<h6>').text('Nauðsynlegt er að slá inn nöfn fyrst!'))
+			if (this.appResultsEl.children('.result').length <= 0) this.appResultsEl.html($('<h6>').text('Nauðsynlegt er að slá inn nöfn fyrst!'));
 			this.appResultsEl.show();
 			this.appResultsControlsEl.show();
 			// this.clearList();
@@ -152,8 +155,10 @@
 
 			if (this.live_list.items.length == 1 && this.live_list.items[0].name === "") {
 				$('.clear-all').addClass('disabled');
+				$('.finalize').addClass('disabled');
 			} else {
 				$('.clear-all').removeClass('disabled');
+				$('.finalize').removeClass('disabled');
 			}
 
 			localStorage.setItem('list',JSON.stringify(this.live_list));
@@ -161,9 +166,11 @@
 		},
 
 		clearListConfirm: function(e){
-			e.preventDefault();
-			var itemEl = $(e.currentTarget);
-			if (itemEl.hasClass("disabled")) return;
+			if (e) {
+				e.preventDefault();
+				var itemEl = $(e.currentTarget);
+				if (itemEl.hasClass("disabled")) return;
+			}
 			if(confirm("Þessi virkni eyðir öllum nöfnum út af listanum þínum. Ertu viss um að þú viljir halda áfram?")) {
 				this.clearList();
 				this.appEl.find('.items').find('.item').remove();
@@ -256,11 +263,11 @@
 		},
 
 		removeItem: function(e){
-			console.log('removeItem')
+			console.log('removeItem');
 			e.preventDefault();
 			var itemEl = $(e.currentTarget),
 				itemActive = parseInt(itemEl.parent('.inside').parent('.item-controls').attr('data-active'),10);
-			if(itemEl.hasClass('disabled')) return;
+			if(itemEl.hasClass('disabled')) return this.clearListConfirm();
 			this.appItemsEl.find('[data-index=' + itemActive + ']').remove();
 			this.processItems();
 			this.updateList();
