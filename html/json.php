@@ -6,6 +6,8 @@
 		$json = $_POST['json'];
 
 		if (json_decode($json) != null) {
+			$backup = file_get_contents('js/db.json');
+			print file_put_contents('js/db_'.time().'.json',$backup);
 			print file_put_contents('js/db.json',$json);
 		} else {
 			print "error";
