@@ -41,18 +41,26 @@
 	}
 
 	.limit {
+		.clearfix;
 	}
 
 	.apple,
+	.links,
 	.w3c {
-		white-space: nowrap;
-		margin-top: -@icon-size/2;
-		position: absolute;
-		top: 50%;
-		right: @gutter;
+		// margin-top: -@icon-size/2;
+		// position: absolute;
+		// top: 50%;
+		// right: @gutter;
 
+		white-space: nowrap;
 		height: @icon-size;
 		line-height: @icon-size;
+
+		float: left;
+
+		&.w3c {
+			float: right;
+		}
 
 		>a,
 		>div {

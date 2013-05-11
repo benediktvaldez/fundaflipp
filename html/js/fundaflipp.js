@@ -126,7 +126,7 @@
 
 		goBack: function(e){
 			e.preventDefault();
-			this.appTitleEl.html('Nöfn þátttakenda');
+			this.appTitleEl.html('Þátttakendur');
 			this.appItemsEl.show();
 			this.appItemsControlsEl.show();
 			this.appItemControlsEl.show();
