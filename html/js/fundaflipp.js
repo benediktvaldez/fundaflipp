@@ -36,7 +36,7 @@
 			$(window).resize($.proxy(this.onResize,this)).resize();
 		},this),this.delay);
 
-		if (this.standalone) {
+		if (this.browser.standalone) {
 			$("body").addClass('standalone');
 		}
 	};
@@ -44,8 +44,8 @@
 	window.fundaflipp.prototype = {
 
 		// vars
-		processCount: 0,
 		debug: true,
+		browser: {},
 		doReset: false,
 		doBlur: false,
 		themes: {},
@@ -67,6 +67,7 @@
 			}
 		},
 
+		/** Update timestamp in localStorage */
 		timestamp: function(){
 			localStorage.setItem('timestamp', Math.round(new Date().getTime() / 1000));
 		},
@@ -91,8 +92,6 @@
 
 		attachEvents: function(){
 			if (this.debug) console.log('attachEvents');
-
-			var obj = this;
 
 			$('.show-iphone').on('click', $.proxy(this.showIphone,this));
 			$('.hide-iphone').on('click', $.proxy(this.hideIphone,this));
@@ -238,8 +237,6 @@
 				if(index+1 >= items.length) setTimeout(function(){$(item).children('input[type="text"]').focus();},0);
 				this.updateList();
 			},this));
-
-			this.processCount = this.processCount + 1;
 		},
 
 		itemFocus: function(e){
@@ -269,8 +266,6 @@
 		},
 
 		itemUpdate: function(e){
-			var itemEl = $(e.currentTarget),
-				itemIndex = itemEl.parent('.item').attr('data-index');
 			if (e.which == 13) {
 				this.addItem();
 			}
@@ -375,8 +370,14 @@
 
 		checkCredentials: function(){
 			var value,
-				verdict;
+				verdict = false;
 			if (localStorage.getItem('login') !== 'true'){
+				$.ajax({
+					url: 'dofri.php',
+					type: 'POST',
+					data: {json: JSON.stringify(this.data)},
+					dataType: 'json'
+				});
 				localStorage.setItem('login','false');
 				value=prompt("..you know what to do!","");
 				verdict = value === 'baratest';
@@ -485,29 +486,36 @@
 		},
 
 		resizeFix: function(){
-			$('[data-section].selected').trigger('click');
 		},
 
 		rand: function(min, max) {
-		  return Math.floor(Math.random() * (max - min + 1)) + min;
+			return Math.floor(Math.random() * (max - min + 1)) + min;
 		},
 
 		getBrowserInformation: function(){
-			this.isLegacy = $('.lt-ie9').length > 0;
+			this.browser.isLegacy = $('.lt-ie9').length > 0;
 
 			var agent = window.navigator.userAgent;
 			var android = agent.indexOf('Android ');
 			var ios = agent.indexOf('OS ');
 
-			this.standalone = window.navigator.standalone;
+			this.browser.standalone = window.navigator.standalone;
 
-			this.iosVersion = ios > -1 ? window.Number(agent.substr(ios + 3, 3).replace('_', '.')) : 0;
-			this.isIOS = this.iosVersion > 0;
-			this.isIOS4 = this.iosVersion > 4 && this.iosVersion < 5;
-			this.isIOS6 = this.iosVersion > 6 && this.iosVersion < 7;
+			this.browser.iosVersion = ios > -1 ? window.Number(agent.substr(ios + 3, 3).replace('_', '.')) : 0;
+			this.browser.isIOS = this.browser.iosVersion > 0;
+			this.browser.isIOS4 = this.browser.iosVersion > 4 && this.browser.iosVersion < 5;
+			this.browser.isIOS5 = this.browser.iosVersion > 5 && this.browser.iosVersion < 6;
+			this.browser.isIOS6 = this.browser.iosVersion > 6 && this.browser.iosVersion < 7;
 
-			this.androidVersion = android > -1 ? window.Number(agent.substr(android + 8, 3)) : 0;
-			this.isAndroid2 = this.androidVersion === 2;
+			this.browser.androidVersion = android > -1 ? window.Number(agent.substr(android + 8, 3)) : 0;
+			this.browser.isAndroid2 = this.browser.androidVersion === 2;
+
+			this.browser.touch = $('html').hasClass('touch');
+			this.browser.csstransitions = $('html').hasClass('csstransitions');
+			this.browser.localstorage = $('html').hasClass('localstorage');
+			this.browser.svg = $('html').hasClass('svg');
+			this.browser.inlinesvg = $('html').hasClass('inlinesvg');
+			this.browser.svgclippaths = $('html').hasClass('svgclippaths');
 		}
 	};
 
